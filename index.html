@@ -67,7 +67,72 @@
 
   <!-- main--------------------- -->
   <main class="max-w-screen-2xl mx-auto px-4 md:px-10 mt-5">
+    <section>
+      <div class="flex mx-auto text-center flex-col md:w-3/5 space-y-4">
+        <h2 class="font-bold text-3xl">Adopt Your Best Friend</h2>
+        <p class="text-gray-500 font-medium">It is a long established fact that a reader will be distracted by the
+          readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+      </div>
+    </section>
 
+    <!-- pets section------------- -->
+    <section>
+      <div id="pets" class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+        <button class="btn btn-outline btn-success rounded-none">Dogs</button>
+        <button class="btn btn-outline btn-success rounded-none">Dogs</button>
+        <button class="btn btn-outline btn-success rounded-none">Dogs</button>
+        <button class="btn btn-outline btn-success rounded-none">Dogs</button>
+      </div>
+      <div class="flex justify-between py-8">
+        <h4 class="font-extrabold text-2xl">Best Deal For you</h4>
+        <button class="btn bg-blue-700 text-white hover:text-black">Shot by Price</button>
+      </div>
+
+      <!-- categories card -->
+      <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 md:col-span-9 ">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            
+            <!-- card  -->
+            <div class="border border-gray-300 rounded-lg p-4 space-y-3">
+              <img class="rounded-lg" src="./assets/banner dogs.png" alt=""  >
+              <h5 class="font-semibold text-2xl">Mister Tartosh</h5>
+              <div class="flex items-center gap-3">
+                <img src="./assets/breed.png" alt="">
+                <h5 class="font-semibold text-base text-gray-500">Breed: Golder retriever</h5>
+              </div>
+              <div class="flex items-center gap-3">
+                <img src="./assets/barth.png" alt="">
+                <h5 class="font-semibold text-base text-gray-500">Birth: 2024</h5>
+              </div>
+              <div class="flex items-center gap-3">
+                <img src="./assets/gender.png" alt="">
+                <h5 class="font-semibold text-base text-gray-500">Gender: Female</h5>
+              </div>
+              <div class="flex items-center gap-3">
+                <img src="./assets/dollar.png" alt="">
+                <h5 class="font-semibold text-base text-gray-500">Price : 199$</h5>
+              </div>
+              <div class="flex justify-between items-center gap-4 pt-3">
+                
+                <button class="btn  btn-outline btn-success"><i class="fa-regular fa-thumbs-up "></i></button>
+                <button class="btn  btn-outline btn-success">Adopt</button>
+                <button class="btn  btn-outline btn-success">Details</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- aside img content -->
+        <div class="col-span-12 md:col-span-3 border border-gray-300 rounded-lg">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 p-4">
+
+            <img class="rounded-xl p-8" src="./assets/banner dogs.png" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- footer--------------------- -->
@@ -99,10 +164,7 @@
               <span class="label-text text-gray-400">Enter your email address</span>
             </label>
             <div class="join">
-              <input
-                type="text"
-                placeholder="username@site.com"
-                class="input input-bordered join-item" />
+              <input type="text" placeholder="username@site.com" class="input input-bordered join-item" />
               <button class="btn bg-blue-700 join-item">Subscribe</button>
             </div>
           </fieldset>
