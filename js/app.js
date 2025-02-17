@@ -193,7 +193,7 @@ const displayPetDetails = (details) => {
                 </div>
             </div>
             <div class="justify-start text-start">
-                <h3 class="font-bold text-lg pb-3">Details Information</h3>
+                <h3 class="font-bold text-lg pb-3 mt-6">Details Information</h3>
                 <h5 class="font-medium text-base text-gray-500">Vaccinated status: ${pet_details ? pet_details : 'N/A'}</h5>
             </div>
             <div class="modal-action ">
@@ -213,21 +213,21 @@ const countdownAdopt = (petId) =>{
     const countdownModal = document.getElementById('countdown-modal');
     const countDownElement = document.getElementById('countdown');
     const adoptBtnId = document.getElementById(`btnAdopt-${petId}`)
+    adoptBtnId.innerText = 'Adobted'
     adoptBtnId.disabled = true;
-        // for(const adoptBtn of adoptBtns){
+    // for(const adoptBtn of adoptBtns){
         //     adoptBtn.disabled = true;
 
         // }
-    let count = 3;
-    countdownModal.classList.remove('hidden')
-    countDownElement.innerText = count;
-    const interval = setInterval(()=>{
-        count--;
+        let count = 3;
+        countdownModal.classList.remove('hidden')
         countDownElement.innerText = count;
-        if(count === 0){
+        const interval = setInterval(()=>{
+            count--;
+            countDownElement.innerText = count;
+            if(count === 0){
             clearInterval(interval);
             countdownModal.classList.add('hidden')
         }
     }, 1000);
 };
-
