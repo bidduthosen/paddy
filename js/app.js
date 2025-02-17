@@ -1,0 +1,187 @@
+const loadCategoriesData = async () => {
+    try {
+        const res = await fetch('https://openapi.programming-hero.com/api/peddy/categories');
+        const data = await res.json();
+        displayCategoriesData(data.categories);
+
+    }
+    catch (err) {
+        console.error(err)
+    };
+};
+
+
+// categories pets id data
+const loadCategoryPetsData = async(categoryId)=>{
+    try {
+        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryId}`)
+        const data = await res.json();
+        displayPets(data.data)
+    }
+    catch (err) {
+        console.error(err)
+    };
+
+};
+
+
+// pets data
+const loadPetsData = async () => {
+    try {
+        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pets`);
+        const data = await res.json();
+        displayPets(data.pets)
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+
+// pets details data load
+const loadpetDetailsData = async (id) => {
+    try {
+        const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+        const data = await res.json();
+        displayPetDetails(data.petData)
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+// display category data
+const displayCategoriesData = (categories) => {
+    const petsContainer = document.getElementById('pets');
+    categories?.map(item => {
+        const div = document.createElement('div');
+        div.innerHTML =
+            `
+            <button id="category-btn" onclick = "loadCategoryPetsData('${item?.category}')"  class="btn btn-outline btn-success rounded-none w-full"><img class="rounded-lg w-8" src="${item?.category_icon}" alt=""> ${item?.category}</button>
+        `;
+        petsContainer.appendChild(div);
+    })
+};
+
+
+// display categories pets data
+// const displayCategoryPets = (categoryPets) =>{
+//     console.log(categoryPets)
+// }
+
+
+// display pets data
+const displayPets = pets => {
+    const petsContent = document.getElementById('pets-content');
+    if(pets.length == 0){
+        document.getElementById('pets-content').innerHTML = `
+            hi
+        `;
+
+    }else{
+        document.getElementById('pets-content').innerHTML = "";
+    }
+
+    pets.map(pet => {
+        const { breed, date_of_birth, image, petId, pet_name, price, gender } = pet;
+        const newDiv = document.createElement('div');
+        newDiv.innerHTML = `
+             <!-- card  -->
+            <div class="border border-gray-300 rounded-lg p-4 space-y-3">
+              <img class="rounded-lg h-48" src="${image}" alt=""  >
+              <h5 class="font-semibold text-2xl">${pet_name ? pet_name : 'UnKnown'}</h5>
+              <div class="flex items-center gap-3">
+                <img src="./assets/breed.png" alt="">
+                <h5 class="font-semibold text-base text-gray-500">Breed: ${breed ? breed : 'Unkhown'}</h5>
+              </div>
+              <div class="flex items-center gap-3">
+                <img src="./assets/barth.png" alt="">
+                <h5 class="font-semibold text-base text-gray-500">Birth: ${date_of_birth ? date_of_birth : 'N/A'}</h5>
+              </div>
+              <div class="flex items-center gap-3">
+                <img src="./assets/gender.png" alt="">
+                <h5 class="font-semibold text-base text-gray-500">Gender: ${gender ? gender : 'N/A'}</h5>
+              </div>
+              <div class="flex items-center gap-3">
+                <img src="./assets/dollar.png" alt="">
+                <h5 class="font-semibold text-base text-gray-500">Price : ${price ? price : 'N/A'}</h5>
+              </div>
+              <div class="flex justify-between items-center gap-4 pt-3">
+                
+                <button onclick= "thumbsApendImg('${image}')" class="btn  btn-outline btn-success"><i class="fa-regular fa-thumbs-up "></i></button>
+                <button class="btn  btn-outline btn-success">Adopt</button>
+                <button onclick= "loadpetDetailsData(${petId})" class="btn  btn-outline btn-success">Details</button>
+              </div>
+            </div>
+        `;
+        petsContent.appendChild(newDiv);
+
+
+    });
+};
+
+// aside apend  image
+const thumbsApendImg = (image) => {
+    const asideImgContent = document.getElementById('aside-img-content');
+    const divImg = document.createElement('div');
+    divImg.innerHTML = `
+    <img class="rounded-xl" src="${image}" alt="">
+    `;
+    asideImgContent.appendChild(divImg)
+}
+
+// display pets details 
+const displayPetDetails = (details) => {
+    const { breed, date_of_birth, image, petId, pet_name, price, gender, vaccinated_status, pet_details } = details;
+
+    // clickded modal open
+    document.getElementById('my_modal_6').click();
+    const detailsContent = document.getElementById('customModal');
+    document.getElementById('customModal').innerHTML = '';
+
+    const div = document.createElement('div');
+    div.className = 'flex justify-center items-center flex-col'
+    div.innerHTML = `
+    <!-- card  -->
+        <div class=" rounded-lg  space-y-3">
+            <img class=" w-fit" src="${image}" alt=""> 
+            <h5 class="font-semibold text-2xl">${pet_name ? pet_name : 'UnKnown'}</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="./assets/breed.png" alt="">
+                    <h5 class="font-semibold text-base text-gray-500">Breed: ${breed ? breed : 'Unkhown'}</h5>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img src="./assets/barth.png" alt="">
+                    <h5 class="font-semibold text-base text-gray-500">Birth: ${date_of_birth ? date_of_birth : 'N/A'}</h5>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img src="./assets/gender.png" alt="">
+                    <h5 class="font-semibold text-base text-gray-500">Gender: ${gender ? gender : 'N/A'}</h5>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img src="./assets/dollar.png" alt="">
+                    <h5 class="font-semibold text-base text-gray-500">Price : ${price ? price : 'N/A'}</h5>
+                </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img src="./assets/gender.png" alt="">
+                    <h5 class="font-semibold text-base text-gray-500">Vaccinated status: ${vaccinated_status ? vaccinated_status : 'N/A'}</h5>
+                </div>
+            </div>
+            <div class="justify-start text-start">
+                <h3 class="font-bold text-lg pb-3">Details Information</h3>
+                <h5 class="font-medium text-base text-gray-500">Vaccinated status: ${pet_details ? pet_details : 'N/A'}</h5>
+            </div>
+            <div class="modal-action ">
+            <label for="my_modal_6" class="btn btn-error">Close!</label>
+            </div> 
+        </div>
+    `;
+    detailsContent.appendChild(div);
+}
+
+
+
+loadCategoriesData();
+loadPetsData()
