@@ -73,12 +73,19 @@ const displayCategoriesData = (categories) => {
 // display pets data
 const displayPets = pets => {
     const petsContent = document.getElementById('pets-content');
+    
+    // if pets data zero than set inner text
     if(pets.length == 0){
+        document.getElementById('pets-content').classList.remove('grid');
         document.getElementById('pets-content').innerHTML = `
-            hi
+            <div class="flex  items-center flex-col space-y-4 h-screen mt-5">
+                <img class ="w-28" src="https://img.icons8.com/?size=100&id=XOr3HY3XJ3a4&format=png&color=000000" alt="">
+                <h3 class=" text-3xl font-bold text-red-400">No Data Available!!</h3>
+            </div>
         `;
 
     }else{
+        document.getElementById('pets-content').classList.add('grid');
         document.getElementById('pets-content').innerHTML = "";
     }
 
