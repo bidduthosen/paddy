@@ -9,4 +9,4 @@ function activePetsButton (category){
         activeCategoryBtn.classList.remove('btn-outline', 'rounded-none')
         activeCategoryBtn.classList.add('rounded-full')
 
-}
+};

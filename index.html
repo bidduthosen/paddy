@@ -85,9 +85,13 @@
         <button class="btn bg-blue-700 text-white hover:text-black">Shot by Price</button>
       </div>
 
+      <div class="flex justify-center items-center ">
+        <span id="loader" class="loading loading-bars loading-lg mb-9"></span>
+      </div>
+
       <!-- categories card -->
       <div class="grid grid-cols-12 gap-5">
-        <div  class="col-span-12 md:col-span-9 ">
+        <div class="col-span-12 md:col-span-9 ">
           <div id="pets-content" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
           </div>
@@ -95,7 +99,7 @@
         <!-- aside img content -->
         <div class="col-span-12 md:col-span-3 border border-gray-300 rounded-lg">
           <div id="aside-img-content" class="grid grid-cols-1 lg:grid-cols-2 gap-5 p-4">
-            
+
           </div>
         </div>
       </div>
@@ -104,12 +108,24 @@
     <!-- modal -->
     <section>
       <!-- The button to open modal -->
-        <!-- Put this part before -->
-        <input type="checkbox" id="my_modal_6" class="modal-toggle" />
-        <div  class="modal" role="dialog">
-          <div id="customModal" class="modal-box  max-w-3xl">
-          </div>
+      <!-- Put this part before -->
+      <input type="checkbox" id="my_modal_6" class="modal-toggle" />
+      <div class="modal" role="dialog">
+        <div id="customModal" class="modal-box  max-w-3xl">
         </div>
+      </div>
+    </section>
+
+    <!-- count down modal -->
+    <section class="mt-28">
+      <div id="countdown-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center space-y-2">
+          <i class="fa-solid fa-trophy text-yellow-600 text-2xl"></i>
+          <h3 class="text-2xl font-semibold">Congrats</h3>
+          <p class="text-gray-700">Adopting Process is start for your pet</p>
+          <h2 id="countdown" class="font-extrabold text-4xl text-red-600">3</h2>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -149,9 +165,10 @@
         </form>
       </div>
     </div>
-  </footer>
+  </footer>>
   <!-- script -->
-   <script src="./js/app.js"></script>
-   <script src="./js/utilities.js"></script>
+  <script src="./js/app.js"></script>
+  <script src="./js/utilities.js"></script>
 </body>
+
 </html>

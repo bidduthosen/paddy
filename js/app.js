@@ -11,6 +11,8 @@ const loadCategoriesData = async () => {
 };
 
 
+
+
 // categories pets id data
 const loadCategoryPetsData = async(categoryId)=>{
     try {
@@ -19,7 +21,13 @@ const loadCategoryPetsData = async(categoryId)=>{
 
         // active btn
         activePetsButton(categoryId)
-        displayPets(data.data)
+        document.getElementById('loader').classList.remove('hidden')
+        
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden')
+            displayPets(data.data)
+            
+        }, 700);
     }
     catch (err) {
         console.error(err)
@@ -33,7 +41,12 @@ const loadPetsData = async () => {
     try {
         const res = await fetch(`https://openapi.programming-hero.com/api/peddy/pets`);
         const data = await res.json();
-        displayPets(data.pets)
+        
+        setTimeout(() => {
+            document.getElementById('loader').classList.add('hidden')
+            displayPets(data.pets);
+            
+        }, 2000);
 
     } catch (err) {
         console.error(err)
@@ -115,7 +128,7 @@ const displayPets = pets => {
               <div class="flex justify-between items-center gap-4 pt-3">
                 
                 <button onclick= "thumbsApendImg('${image}')" class="btn btn-sm  btn-outline btn-success"><i class="fa-regular fa-thumbs-up "></i></button>
-                <button class="btn btn-sm  btn-outline btn-success">Adopt</button>
+                <button id='btnAdopt-${petId}' onclick="countdownAdopt('${petId}')" class="btn btn-sm  btn-outline btn-success adopt-btn">Adopt</button>
                 <button onclick= "loadpetDetailsData(${petId})" class="btn btn-sm  btn-outline btn-success">Details</button>
               </div>
             </div>
@@ -125,6 +138,10 @@ const displayPets = pets => {
 
     });
 };
+
+
+
+// click this button count down 
 
 // aside apend  image
 const thumbsApendImg = (image) => {
@@ -138,7 +155,7 @@ const thumbsApendImg = (image) => {
 
 // display pets details 
 const displayPetDetails = (details) => {
-    const { breed, date_of_birth, image, petId, pet_name, price, gender, vaccinated_status, pet_details } = details;
+    const { breed, date_of_birth, image, pet_name, price, gender, vaccinated_status, pet_details } = details;
 
     // clickded modal open
     document.getElementById('my_modal_6').click();
@@ -187,8 +204,30 @@ const displayPetDetails = (details) => {
     detailsContent.appendChild(div);
 }
 
-
-
-
 loadCategoriesData();
 loadPetsData()
+
+
+
+const countdownAdopt = (petId) =>{
+    const countdownModal = document.getElementById('countdown-modal');
+    const countDownElement = document.getElementById('countdown');
+    const adoptBtnId = document.getElementById(`btnAdopt-${petId}`)
+    adoptBtnId.disabled = true;
+        // for(const adoptBtn of adoptBtns){
+        //     adoptBtn.disabled = true;
+
+        // }
+    let count = 3;
+    countdownModal.classList.remove('hidden')
+    countDownElement.innerText = count;
+    const interval = setInterval(()=>{
+        count--;
+        countDownElement.innerText = count;
+        if(count === 0){
+            clearInterval(interval);
+            countdownModal.classList.add('hidden')
+        }
+    }, 1000);
+};
+
