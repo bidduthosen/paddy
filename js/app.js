@@ -16,6 +16,9 @@ const loadCategoryPetsData = async(categoryId)=>{
     try {
         const res = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoryId}`)
         const data = await res.json();
+
+        // active btn
+        activePetsButton(categoryId)
         displayPets(data.data)
     }
     catch (err) {
@@ -53,40 +56,36 @@ const loadpetDetailsData = async (id) => {
 // display category data
 const displayCategoriesData = (categories) => {
     const petsContainer = document.getElementById('pets');
+
     categories?.map(item => {
         const div = document.createElement('div');
         div.innerHTML =
             `
-            <button id="category-btn" onclick = "loadCategoryPetsData('${item?.category}')"  class="btn btn-outline btn-success rounded-none w-full"><img class="rounded-lg w-8" src="${item?.category_icon}" alt=""> ${item?.category}</button>
+            <button id='btn-${item?.category}' onclick ="loadCategoryPetsData('${item?.category}')" class="btn btn-outline btn-success rounded-none w-full category-btn"><img class="rounded-lg w-8" src="${item?.category_icon}" alt=""> ${item?.category}</button>
+            
         `;
         petsContainer.appendChild(div);
     })
 };
 
 
-// display categories pets data
-// const displayCategoryPets = (categoryPets) =>{
-//     console.log(categoryPets)
-// }
-
-
 // display pets data
 const displayPets = pets => {
     const petsContent = document.getElementById('pets-content');
+    petsContent.innerHTML = "";
     
     // if pets data zero than set inner text
     if(pets.length == 0){
         document.getElementById('pets-content').classList.remove('grid');
-        document.getElementById('pets-content').innerHTML = `
+        petsContent.innerHTML = `
             <div class="flex  items-center flex-col space-y-4 h-screen mt-5">
                 <img class ="w-28" src="https://img.icons8.com/?size=100&id=XOr3HY3XJ3a4&format=png&color=000000" alt="">
-                <h3 class=" text-3xl font-bold text-red-400">No Data Available!!</h3>
+                <h3 class=" text-3xl font-bold text-red-400">Opss!!.. No Data Available!</h3>
             </div>
         `;
 
     }else{
         document.getElementById('pets-content').classList.add('grid');
-        document.getElementById('pets-content').innerHTML = "";
     }
 
     pets.map(pet => {
@@ -95,7 +94,7 @@ const displayPets = pets => {
         newDiv.innerHTML = `
              <!-- card  -->
             <div class="border border-gray-300 rounded-lg p-4 space-y-3">
-              <img class="rounded-lg h-48" src="${image}" alt=""  >
+              <img class="rounded-lg h-48 w-full" src="${image}" alt=""  >
               <h5 class="font-semibold text-2xl">${pet_name ? pet_name : 'UnKnown'}</h5>
               <div class="flex items-center gap-3">
                 <img src="./assets/breed.png" alt="">
@@ -115,9 +114,9 @@ const displayPets = pets => {
               </div>
               <div class="flex justify-between items-center gap-4 pt-3">
                 
-                <button onclick= "thumbsApendImg('${image}')" class="btn  btn-outline btn-success"><i class="fa-regular fa-thumbs-up "></i></button>
-                <button class="btn  btn-outline btn-success">Adopt</button>
-                <button onclick= "loadpetDetailsData(${petId})" class="btn  btn-outline btn-success">Details</button>
+                <button onclick= "thumbsApendImg('${image}')" class="btn btn-sm  btn-outline btn-success"><i class="fa-regular fa-thumbs-up "></i></button>
+                <button class="btn btn-sm  btn-outline btn-success">Adopt</button>
+                <button onclick= "loadpetDetailsData(${petId})" class="btn btn-sm  btn-outline btn-success">Details</button>
               </div>
             </div>
         `;
@@ -151,7 +150,7 @@ const displayPetDetails = (details) => {
     div.innerHTML = `
     <!-- card  -->
         <div class=" rounded-lg  space-y-3">
-            <img class=" w-fit" src="${image}" alt=""> 
+            <img class=" w-full md:h-[500px] rounded-2xl" src="${image}" alt=""> 
             <h5 class="font-semibold text-2xl">${pet_name ? pet_name : 'UnKnown'}</h5>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex items-center gap-3">
@@ -187,6 +186,7 @@ const displayPetDetails = (details) => {
     `;
     detailsContent.appendChild(div);
 }
+
 
 
 

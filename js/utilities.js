@@ -1,5 +1,12 @@
-// function activeButton (id){
-//     //  document.getElementById('category-btn').classList.add('btn-outline');
-//     //  document.getElementById(`${id}`).classList.remove('btn-outline');
+function activePetsButton (category){
+    const categoryBtnList = document.getElementsByClassName('category-btn');
+    for(const categoryBtn of categoryBtnList){
+        categoryBtn.classList.add('btn-outline', 'rounded-none')
+        categoryBtn.classList.remove('rounded-full')
+    }
 
-// }
+     const activeCategoryBtn = document.getElementById(`btn-${category}`);
+        activeCategoryBtn.classList.remove('btn-outline', 'rounded-none')
+        activeCategoryBtn.classList.add('rounded-full')
+
+}
